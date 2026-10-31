@@ -1,5 +1,7 @@
 # CurseForge listing files
 
+CurseForge Project ID: **1776245**. Binary releases are connected to the shared publisher as `charms`.
+
 - `icon.png`: square transparent PNG, author bucket series.
 - `summary.txt`: English project summary.
 - `description.md`: English Markdown description.
