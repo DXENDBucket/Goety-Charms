@@ -1,0 +1,39 @@
+{
+  "algorithm": "pixel-assets-1",
+  "outputs": {
+    "sprite": "eeefdbe8bf94ba830939af6b2dd8bcb88fe9aac2c463dd6d9ea91ba449fe5826"
+  },
+  "pillow": "12.0.0",
+  "revision": "374920261b94d705",
+  "sources": {
+    "sprite": {
+      "file": "original.png",
+      "generator": "builtin-imagegen",
+      "prompt_used": "Create ONE game item sprite for Minecraft mod Goety Charms. A blank ritual charm: a small flat rectangular ivory bone-and-parchment plaque, beveled dark charcoal rim, two slightly chipped upper corners, tiny burgundy cord tied through its top, modest ancient dark-magic craftsmanship, central face mostly blank for later stamped sigils. Upright front view with only a subtle diagonal tilt. Pixel art that is logically drawn on a 32 by 32 pixel grid and then enlarged by nearest-neighbor: extremely readable bold silhouette, clustered 2-4 pixel shading, limited 12-16 color palette ivory, parchment beige, dark charcoal, muted burgundy; avoid granular noise, tiny scribbles, text or letters, no UI, no ground shadow, no backdrop, no border outside the object. Single isolated item centered with transparent margin all around, transparent background, high contrast, Minecraft vanilla-compatible item appearance. This is the shared base for blank, summoning, and transmutation charms; preserve a quiet mostly blank central 10x12 pixel panel. Only one item, not a sheet.\n",
+      "sha256": "9fadd12602ea5d3ec16a7ad4dfdebc189f8f40a668e9651f9f8382b3f22d4448"
+    }
+  },
+  "spec": {
+    "family": "Ritual charms: ivory parchment-and-bone plaque, dark rim, burgundy cord, shared silhouette and central stamping panel.",
+    "id": "blank_charm",
+    "kind": "item",
+    "layout": "generated",
+    "namespace": "goety_charms",
+    "palette": [],
+    "processing": {
+      "alpha_threshold": 128,
+      "colors": 16,
+      "padding": 2,
+      "sampling": "box"
+    },
+    "references": [],
+    "schema_version": 1,
+    "size": 32,
+    "textures": {
+      "sprite": {
+        "constraints": "Bold 32-pixel silhouette, transparent background, no text, shared family silhouette.",
+        "subject": "Blank rectangular ivory ritual plaque, charcoal rim and burgundy cord, quiet blank center."
+      }
+    }
+  }
+}

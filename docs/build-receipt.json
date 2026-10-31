@@ -1,0 +1,37 @@
+{
+  "version": "0.1.0",
+  "platforms": [
+    "1.21.1 NeoForge",
+    "1.20.1 Forge"
+  ],
+  "upstream_goety": [
+    "3.2.2",
+    "2.5.59.2"
+  ],
+  "validation": {
+    "main_compilation": "passed on both loaders",
+    "gametest_source_compilation": "passed; six cases per loader",
+    "forge_reobf_and_verifyRelease": "passed",
+    "release_license_models_lang_mixin_and_dependency_exclusion": "passed",
+    "runtime_client_server_or_gametest": "not run",
+    "full_native_altar_payment_cycle": "not runtime tested"
+  },
+  "artifacts": [
+    {
+      "path": "build/libs/goety-charms-0.1.0-mc1.21.1-neoforge.jar",
+      "sha256": "4ecc403e7bd97c3d23578907a426ef2c8af9fb0d1130d7b600d8ed2e9eaa7be4"
+    },
+    {
+      "path": "build/libs/goety-charms-0.1.0-sources.jar",
+      "sha256": "2ca3a80a441ce0e9464c06328c5c77059e81d112e8ff414fb36dbe56e804af8f"
+    },
+    {
+      "path": "forge/build/libs/goety-charms-0.1.0-mc1.20.1-forge.jar",
+      "sha256": "017502dc749fa6e8173a3cfdcc76a4d8ac66a83a01f19a566447161e0dd13592"
+    },
+    {
+      "path": "forge/build/libs/goety-charms-0.1.0-sources.jar",
+      "sha256": "8cd9f4e783c3586a9cac188bcd70581f4cc0d206439da8787197f401538d4dcf"
+    }
+  ]
+}

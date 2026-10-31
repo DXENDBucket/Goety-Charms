@@ -1,0 +1,15 @@
+package dev.goetycharms;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.server.level.ServerPlayer;
+public final class TestPlayers {
+    static ServerPlayer player(GameTestHelper h){
+        var cookie=net.minecraft.server.network.CommonListenerCookie.createInitial(new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"CharmStudent"),false);
+        var player=new ServerPlayer(h.getLevel().getServer(),h.getLevel(),cookie.gameProfile(),cookie.clientInformation());
+        var connection=new net.minecraft.network.Connection(net.minecraft.network.protocol.PacketFlow.SERVERBOUND);new io.netty.channel.embedded.EmbeddedChannel(connection);
+        player.connection=new net.minecraft.server.network.ServerGamePacketListenerImpl(h.getLevel().getServer(),connection,player,cookie){
+            @Override public void send(net.minecraft.network.protocol.Packet<?> packet){}
+            @Override public void send(net.minecraft.network.protocol.Packet<?> packet,net.minecraft.network.PacketSendListener listener){}
+        };
+        player.setPos(h.absoluteVec(new net.minecraft.world.phys.Vec3(1,2,1)));player.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);return player;
+    }
+}

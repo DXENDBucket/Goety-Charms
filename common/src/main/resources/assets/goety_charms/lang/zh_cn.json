@@ -1,0 +1,19 @@
+{
+  "itemGroup.goety_charms": "诡厄符咒",
+  "item.goety_charms.blank_charm": "空白符咒",
+  "item.goety_charms.summoning_charm": "召唤符咒",
+  "item.goety_charms.conversion_charm": "转化符咒",
+  "item.goety_charms.summoning_charm.named": "%s召唤符咒",
+  "item.goety_charms.conversion_charm.named": "%s转化符咒",
+  "tooltip.goety_charms.blank": "手持右键黑暗祭坛，原激活物与辅材放在基座上；潜行右键切换匹配的仪式。",
+  "tooltip.goety_charms.preview": "尚未封存的样本，完成符咒仪式后才能使用。",
+  "tooltip.goety_charms.use": "长按右键释放一次；转化时需瞄准符合条件的生物。",
+  "message.goety_charms.selected": "已选择：%s",
+  "message.goety_charms.ambiguous": "有%s种匹配仪式，潜行右键祭坛进行选择。",
+  "message.goety_charms.missing_recipe": "符咒记录的仪式已不存在、被禁用或尚不支持。",
+  "message.goety_charms.invalid_charm": "这枚符咒尚未正确封存。",
+  "message.goety_charms.unsafe": "这里没有足够的安全空间。",
+  "message.goety_charms.peaceful": "和平难度下使徒无法降临。",
+  "message.goety_charms.wrong_target": "请瞄准符合这种转化条件的生物。",
+  "message.goety_charms.blocked": "仪式未能生效，符咒仍然完好。"
+}

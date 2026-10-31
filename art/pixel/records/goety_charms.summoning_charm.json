@@ -1,0 +1,39 @@
+{
+  "algorithm": "pixel-assets-1",
+  "outputs": {
+    "sprite": "626cfa2c74560190a1f697aa903d79a8a5c4f1df90837f5b3e5d3ce879acbe8e"
+  },
+  "pillow": "12.0.0",
+  "revision": "7909aaf5e66df5ce",
+  "sources": {
+    "sprite": {
+      "file": "original.png",
+      "generator": "procedural",
+      "prompt_used": null,
+      "sha256": "a8c3572ce95a56d4886f348567a6d129266c955b9c54b38eab54f491203f17ae"
+    }
+  },
+  "spec": {
+    "family": "Ritual charms: ivory parchment-and-bone plaque, dark rim, burgundy cord, shared silhouette and central stamping panel.",
+    "id": "summoning_charm",
+    "kind": "item",
+    "layout": "generated",
+    "namespace": "goety_charms",
+    "palette": [],
+    "processing": {
+      "alpha_threshold": 128,
+      "colors": 16,
+      "padding": 2,
+      "sampling": "box"
+    },
+    "references": [],
+    "schema_version": 1,
+    "size": 32,
+    "textures": {
+      "sprite": {
+        "constraints": "Bold 32-pixel silhouette, transparent background, no text, shared family silhouette.",
+        "subject": "The same ivory charm base stamped with a green summoning square seal"
+      }
+    }
+  }
+}

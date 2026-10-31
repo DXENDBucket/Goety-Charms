@@ -1,0 +1,39 @@
+{
+  "algorithm": "pixel-assets-1",
+  "outputs": {
+    "sprite": "72d0bd5d2f1c53cf9deb76a5653c445bba56e62c29e8e637a18f782e352940eb"
+  },
+  "pillow": "12.0.0",
+  "revision": "d39fa76945a8e215",
+  "sources": {
+    "sprite": {
+      "file": "original.png",
+      "generator": "procedural",
+      "prompt_used": null,
+      "sha256": "d7e1a1427e19c6fbcb43cf183d9de027d43fce9bc8f27f4121d1a2578e46f046"
+    }
+  },
+  "spec": {
+    "family": "Ritual charms: ivory parchment-and-bone plaque, dark rim, burgundy cord, shared silhouette and central stamping panel.",
+    "id": "conversion_charm",
+    "kind": "item",
+    "layout": "generated",
+    "namespace": "goety_charms",
+    "palette": [],
+    "processing": {
+      "alpha_threshold": 128,
+      "colors": 16,
+      "padding": 2,
+      "sampling": "box"
+    },
+    "references": [],
+    "schema_version": 1,
+    "size": 32,
+    "textures": {
+      "sprite": {
+        "constraints": "Bold 32-pixel silhouette, transparent background, no text, shared family silhouette.",
+        "subject": "The same ivory charm base stamped with a violet opposing-arrow conversion seal"
+      }
+    }
+  }
+}

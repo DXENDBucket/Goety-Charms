@@ -1,0 +1,19 @@
+{
+  "itemGroup.goety_charms": "Goety Charms",
+  "item.goety_charms.blank_charm": "Blank Charm",
+  "item.goety_charms.summoning_charm": "Summoning Charm",
+  "item.goety_charms.conversion_charm": "Conversion Charm",
+  "item.goety_charms.summoning_charm.named": "%s Summoning Charm",
+  "item.goety_charms.conversion_charm.named": "%s Conversion Charm",
+  "tooltip.goety_charms.blank": "Use on a Dark Altar; place the original catalyst and ingredients on pedestals. Sneak-use to switch matching rituals.",
+  "tooltip.goety_charms.preview": "Unsealed sample. Complete a sealing ritual before use.",
+  "tooltip.goety_charms.use": "Hold use to release once. Conversion requires a matching creature in your sights.",
+  "message.goety_charms.selected": "Selected: %s",
+  "message.goety_charms.ambiguous": "%s rituals match. Sneak-use the altar to select one.",
+  "message.goety_charms.missing_recipe": "The recorded ritual is missing, disabled or unsupported.",
+  "message.goety_charms.invalid_charm": "This charm has not been properly sealed.",
+  "message.goety_charms.unsafe": "There is not enough safe space here.",
+  "message.goety_charms.peaceful": "The Apostle cannot descend on Peaceful difficulty.",
+  "message.goety_charms.wrong_target": "Aim at a creature suitable for this conversion.",
+  "message.goety_charms.blocked": "The ritual could not take effect. The charm remains intact."
+}

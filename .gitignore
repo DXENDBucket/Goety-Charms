@@ -1,0 +1,15 @@
+.gradle/
+build/
+run/
+libs/
+art/work/
+*.log
+*.class
+.idea/
+.vscode/
+__pycache__/
+art/pixel/work/
+.env
+.env.*
+*.key
+*.pem

@@ -1,0 +1,44 @@
+plugins { id 'java-library'; id 'net.minecraftforge.gradle' version '6.0.36'; id 'org.spongepowered.mixin' version '0.7.38' }
+group='dev.goetycharms'
+version=file('../VERSION').text.trim()
+base { archivesName='goety-charms' }
+java { toolchain.languageVersion=JavaLanguageVersion.of(17); withSourcesJar() }
+repositories { flatDir { dirs 'libs' }; mavenCentral { content { excludeGroup 'local' } } }
+sourceSets { main { java.srcDir '../common/src/main/java'; resources.srcDir '../common/src/main/resources' }; gameTest { java.srcDir '../common/src/gameTest/java'; compileClasspath+=sourceSets.main.output; runtimeClasspath+=sourceSets.main.output } }
+configurations { gameTestImplementation.extendsFrom implementation; gameTestRuntimeOnly.extendsFrom runtimeOnly }
+minecraft {
+    mappings channel:'official',version:'1.20.1'
+    copyIdeResources=true
+    runs {
+        gameTestServer { workingDirectory project.file('run/gametest'); property 'forge.enabledGameTestNamespaces','goety_charms'; jvmArgs '-Xmx1100m'; mods { goety_charms { source sourceSets.main; source sourceSets.gameTest } } }
+        client { workingDirectory project.file('run/client'); mods { goety_charms { source sourceSets.main } } }
+    }
+}
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.0'
+    implementation fg.deobf('local:goety:2.5.59.2-forge1201')
+    for(name in ['geckolib','curios','patchouli'])implementation fg.deobf("local:${name}:forge1201")
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+mixin { add sourceSets.main,'goety_charms.refmap.json'; config 'goety_charms.mixins.json' }
+tasks.named('compileJava') { options.incremental=false; outputs.file(layout.buildDirectory.file('tmp/compileJava/compileJava-refmap.json')).withPropertyName('mixinRefmap'); outputs.file(layout.buildDirectory.file('tmp/compileJava/goety_charms.refmap.json')).withPropertyName('packagedMixinRefmap'); outputs.file(layout.buildDirectory.file('tmp/compileJava/compileJava-mappings.tsrg')).withPropertyName('mixinMappings') }
+tasks.withType(JavaCompile).configureEach { options.encoding='UTF-8' }
+processResources { inputs.property 'version',project.version; filesMatching('META-INF/mods.toml') { expand(version:project.version) } }
+tasks.named('jar') { from('../LICENSE'); archiveFileName="goety-charms-${project.version}-mc1.20.1-forge.jar"; manifest { attributes 'MixinConfigs':'goety_charms.mixins.json' }; finalizedBy 'reobfJar' }
+tasks.named('sourcesJar') { from('../LICENSE') }
+
+// Check the final production archive, including the one native Minecraft injection.
+tasks.register('verifyRelease') {
+    dependsOn 'reobfJar'
+    doLast {
+        new java.util.zip.ZipFile(tasks.named('jar').get().archiveFile.get().asFile).withCloseable { zip ->
+            def config=new groovy.json.JsonSlurper().parse(zip.getInputStream(zip.getEntry('goety_charms.mixins.json')))
+            if(config.refmap!='goety_charms.refmap.json' || zip.getEntry(config.refmap)==null || zip.getEntry('LICENSE')==null)throw new GradleException('Missing production Mixin refmap or MIT license')
+            def map=new groovy.json.JsonSlurper().parse(zip.getInputStream(zip.getEntry(config.refmap)))
+            def targets=map.mappings?.get('dev/goetycharms/mixin/DerivedRecipesMixin')
+            if(targets==null || !targets.values().any{it.contains('m_5787_')})throw new GradleException('RecipeManager.apply production mapping missing')
+            def mf=new java.util.jar.Manifest(zip.getInputStream(zip.getEntry('META-INF/MANIFEST.MF')))
+            if(mf.mainAttributes.getValue('MixinConfigs')!='goety_charms.mixins.json')throw new GradleException('MixinConfigs manifest missing')
+        }
+    }
+}

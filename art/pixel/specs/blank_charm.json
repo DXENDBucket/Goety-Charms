@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "namespace": "goety_charms",
+  "id": "blank_charm",
+  "kind": "item",
+  "layout": "generated",
+  "size": 32,
+  "family": "Ritual charms: ivory parchment-and-bone plaque, dark rim, burgundy cord, shared silhouette and central stamping panel.",
+  "palette": [],
+  "references": [],
+  "processing": {
+    "sampling": "box",
+    "colors": 16,
+    "padding": 2,
+    "alpha_threshold": 128
+  },
+  "textures": {
+    "sprite": {
+      "subject": "Blank rectangular ivory ritual plaque, charcoal rim and burgundy cord, quiet blank center.",
+      "constraints": "Bold 32-pixel silhouette, transparent background, no text, shared family silhouette."
+    }
+  }
+}

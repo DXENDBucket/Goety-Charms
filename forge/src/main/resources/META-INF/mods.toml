@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="goety_charms"
+version="${version}"
+displayName="Goety Charms"
+authors="EndXiom"
+description='''Seal Goety summoning and conversion rituals into consumable charms. Automatically derives sealing rituals from supported loaded recipes.'''
+
+[[dependencies.goety_charms]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.goety_charms]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.0,48)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.goety_charms]]
+modId="goety"
+mandatory=true
+versionRange="[2.5.59.2,3)"
+ordering="AFTER"
+side="BOTH"
