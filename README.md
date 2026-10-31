@@ -1,10 +1,10 @@
 # Goety Charms · 诡厄符咒
 
-Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.2.0**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
+Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.2.1**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
 
 ## 制作与使用
 
-1. 用纸 ×1、骨粉 ×1、线 ×1，无序合成空白符咒 ×4。
+1. 工作台有序合成：纸 ×1 放正中，石英 ×4 分别放在上下左右，产出空白符咒 ×4。
 2. 按原仪式搭建黑暗祭坛、诅咒之笼和环境。原激活物与所有辅材都放在周围基座，每份占一个基座。
 3. 手持空白符咒右键祭坛，开始封存。需要的研究、环境、灵魂费用、仪式时间和献祭条件沿用原配方。
 4. 同一组材料匹配多个仪式时，潜行右键祭坛切换，普通右键确认。其他物品在副手时也可通过物品交互切换。

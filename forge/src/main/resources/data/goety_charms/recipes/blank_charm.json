@@ -1,16 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Q ",
+    "QPQ",
+    " Q "
+  ],
+  "key": {
+    "P": {
       "item": "minecraft:paper"
     },
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:string"
+    "Q": {
+      "item": "minecraft:quartz"
     }
-  ],
+  },
   "result": {
     "item": "goety_charms:blank_charm",
     "count": 4

@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "platforms": [
     "1.21.1 NeoForge",
     "1.20.1 Forge"
@@ -19,24 +19,25 @@
     "utility_release_packaging": "passed; five item models/textures, bilingual names and native paid-ingredient injection present on both loaders",
     "native_utility_recipe_data": "NeoForge: 1 teleport + 20 locate; Forge: 1 teleport + 19 locate",
     "teleport_behavior": "native destination/dimension rules and native finish; no added landing checks, explicit chunk loading or fall-distance reset",
-    "async_structure_search": "not runtime tested; native exploration-map finish fixture compiled only"
+    "async_structure_search": "not runtime tested; native exploration-map finish fixture compiled only",
+    "blank_charm_recipe": "Both release archives verified: shaped, center paper + four cardinal quartz, output 4"
   },
   "artifacts": [
     {
-      "path": "build/libs/goety-charms-0.2.0-mc1.21.1-neoforge.jar",
-      "sha256": "1654763a1a216859f15534d3d960df33f43ba2a020c1a1775f63098666b99f71"
+      "path": "build/libs/goety-charms-0.2.1-mc1.21.1-neoforge.jar",
+      "sha256": "96e9fa26d13ff03fb309a351899b1587d310a1325de38ef958791b743fda9473"
     },
     {
-      "path": "build/libs/goety-charms-0.2.0-sources.jar",
-      "sha256": "8a4d490aa4dde96839570d7372619d8283405951c772bb8237c8b39b26cd408b"
+      "path": "build/libs/goety-charms-0.2.1-sources.jar",
+      "sha256": "468ae049d611a9757ffbe09e8cf68b24f898e2815a6c1a73ec9322521447cb50"
     },
     {
-      "path": "forge/build/libs/goety-charms-0.2.0-mc1.20.1-forge.jar",
-      "sha256": "5a89b9cff67748f38b8fe206ef00779eebe67c12e1b88394ede20260092dff23"
+      "path": "forge/build/libs/goety-charms-0.2.1-mc1.20.1-forge.jar",
+      "sha256": "ed9935e0dfd15a209ff0367713c3e7de0587e8444b752c491201cfa912ef704d"
     },
     {
-      "path": "forge/build/libs/goety-charms-0.2.0-sources.jar",
-      "sha256": "eebb47d567b24307e6e263edb5764f4d64a9b98c21b058122677c22bb4b174cc"
+      "path": "forge/build/libs/goety-charms-0.2.1-sources.jar",
+      "sha256": "f5bbb5693bffaa5cfb74d1b95669e7958ffc83f521ee5402efe7d1c7b5bc5eb8"
     }
   ]
 }
