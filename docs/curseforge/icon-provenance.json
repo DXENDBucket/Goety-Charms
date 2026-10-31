@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen",
+  "use_case": "logo-brand",
+  "transparent_background": true,
+  "prompt_file": "icon-prompt.txt",
+  "size": [
+    1254,
+    1254
+  ],
+  "sha256": "ba42566aaafe613d0922c7e248fcd53eaa73abf64e7d18717da49c4c132f04ef",
+  "references": [
+    "author bucket series Goety & Nouveau icon",
+    "vanilla Minecraft empty bucket sprite",
+    "own Goety Charms summoning charm sprite"
+  ],
+  "postprocessing": "none; original generated PNG copied unchanged"
+}

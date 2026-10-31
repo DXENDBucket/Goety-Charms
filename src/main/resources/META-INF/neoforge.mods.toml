@@ -7,8 +7,9 @@ config="goety_charms.mixins.json"
 modId="goety_charms"
 version="${version}"
 displayName="Goety Charms"
+logoFile="goety-charms-icon.png"
 authors="EndXiom"
-description='''Seal Goety summoning and conversion rituals into consumable charms. Automatically derives sealing rituals from supported loaded recipes.'''
+description='''Seal Goety rituals into single-use summoning, conversion, teleportation and location charms. Automatically derives sealing rituals from supported loaded recipes.'''
 
 [[dependencies.goety_charms]]
 modId="minecraft"

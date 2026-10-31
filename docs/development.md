@@ -36,6 +36,8 @@ The original charm stays in the player's inventory until native map output succe
 
 ## Tooltips
 
+Optional integrations use `api.CharmAccess`: `kind` and `sealed` inspect candidates without exposing platform storage; `release` delegates to the same authoritative release path as item use. The caller supplies its own trigger (for example an Ars hit); ordinary item use still requires the full configured hold duration. No Ars classes or dependency are introduced into Charms.
+
 Summoning and conversion charms have separate use descriptions. Conversion charms show the source ritual's `entity_to_convert.display_name` on its own localized target line, matching native Goety JEI rather than naming the conversion output. A saved translation-key snapshot supports playerless recipe previews; when a player context is available, current recipe metadata takes priority and also supplies the target for older charms. This display snapshot does not change server-side target validation.
 
 ## Verification

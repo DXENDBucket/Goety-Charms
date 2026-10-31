@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.2.2",
   "platforms": [
     "1.21.1 NeoForge",
     "1.20.1 Forge"
@@ -10,7 +10,7 @@
   ],
   "validation": {
     "main_compilation": "passed on both loaders",
-    "gametest_source_compilation": "passed; eight cases per loader; not executed",
+    "gametest_source_compilation": "eight unchanged cases previously compile-checked; not rerun for API/branding batch",
     "forge_reobf_and_verifyRelease": "passed",
     "release_license_models_lang_mixin_and_dependency_exclusion": "passed",
     "runtime_client_server_or_gametest": "not run",
@@ -20,24 +20,26 @@
     "native_utility_recipe_data": "NeoForge: 1 teleport + 20 locate; Forge: 1 teleport + 19 locate",
     "teleport_behavior": "native destination/dimension rules and native finish; no added landing checks, explicit chunk loading or fall-distance reset",
     "async_structure_search": "not runtime tested; native exploration-map finish fixture compiled only",
-    "blank_charm_recipe": "Both release archives verified: shaped, center paper + four cardinal quartz, output 4"
+    "blank_charm_recipe": "Both release archives verified: shaped, center paper + four cardinal quartz, output 4",
+    "public_charm_api": "CharmAccess kind/sealed/release compiled and packaged on both loaders; no Ars/Conflux dependency",
+    "branding": "transparent square original imagegen PNG, logo metadata and CF English/Chinese listing assets checked"
   },
   "artifacts": [
     {
-      "path": "build/libs/goety-charms-0.2.1-mc1.21.1-neoforge.jar",
-      "sha256": "96e9fa26d13ff03fb309a351899b1587d310a1325de38ef958791b743fda9473"
+      "path": "build/libs/goety-charms-0.2.2-mc1.21.1-neoforge.jar",
+      "sha256": "2fc0736aa8342b1aeec8886ded6f2c9366ad782f56140dbc673287949dd9ddf1"
     },
     {
-      "path": "build/libs/goety-charms-0.2.1-sources.jar",
-      "sha256": "468ae049d611a9757ffbe09e8cf68b24f898e2815a6c1a73ec9322521447cb50"
+      "path": "build/libs/goety-charms-0.2.2-sources.jar",
+      "sha256": "47464d3e039b6497d0ebbda170fff9ecd64e63c2144c4b24e980ad989f5a634e"
     },
     {
-      "path": "forge/build/libs/goety-charms-0.2.1-mc1.20.1-forge.jar",
-      "sha256": "ed9935e0dfd15a209ff0367713c3e7de0587e8444b752c491201cfa912ef704d"
+      "path": "forge/build/libs/goety-charms-0.2.2-mc1.20.1-forge.jar",
+      "sha256": "ef56f8d85ba1643fc34df90987e213113c326c2f783a9a69736f48504bdbf511"
     },
     {
-      "path": "forge/build/libs/goety-charms-0.2.1-sources.jar",
-      "sha256": "f5bbb5693bffaa5cfb74d1b95669e7958ffc83f521ee5402efe7d1c7b5bc5eb8"
+      "path": "forge/build/libs/goety-charms-0.2.2-sources.jar",
+      "sha256": "06b7d043143fe0632b3b5133e32a711f5bc65d7237f4f63ec081e9749f2e5f10"
     }
   ]
 }

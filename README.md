@@ -1,6 +1,6 @@
 # Goety Charms · 诡厄符咒
 
-Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.2.1**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
+Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.2.2**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
 
 ## 制作与使用
 
@@ -27,6 +27,8 @@ Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.2.1**, MI
 召出的生物按原仪式初始化归属、变体、装备和原生生命周期。使徒符咒仍产生原生的降临过程：和平难度拒绝释放，在下界保留原生警告／再次使用确认；不会把使徒变成友军。环境布置只在封存时检查。
 
 ## 自动兼容
+
+可选联动可通过 `api.CharmAccess.kind`、`sealed` 和 `release` 查询符咒并复用完整释放路径，无需读取加载器专用的数据组件或 NBT。本体仍不依赖 Ars 或其他联动模组。
 
 从实际加载的仪式自动生成真正的 Goety 封存配方，使用原生祭坛，进入 Goety 原生 JEI 仪式分类；没有另一套材料支付、灵魂扣费或仪式进度实现。
 
