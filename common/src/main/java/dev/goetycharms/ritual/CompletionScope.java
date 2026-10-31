@@ -20,6 +20,10 @@ public final class CompletionScope implements AutoCloseable {
     public static CompletionScope release(DarkAltarBlockEntity tile,net.minecraft.world.entity.EntityType<?> expected,boolean variants){return new CompletionScope(null,tile,expected,variants);}
     public static boolean capturing(SealingRecipe recipe){var s=CURRENT.get();return s!=null&&s.sealing==recipe;}
     public static boolean paid(DarkAltarBlockEntity tile){var s=CURRENT.get();return s!=null&&s.releasing==tile;}
+    public static boolean paidIngredients(net.minecraft.world.level.Level world,net.minecraft.core.BlockPos pos,net.minecraft.world.entity.player.Player player) {
+        var s=CURRENT.get();return s!=null&&s.releasing!=null&&s.releasing.getLevel()==world
+                &&s.releasing.getBlockPos().equals(pos)&&s.releasing.castingPlayer==player;
+    }
     public static void observe(Entity entity){var s=CURRENT.get();if(s!=null&&s.releasing!=null&&s.releasing.getLevel()==entity.level()
             &&(entity.getType()==s.expected||s.livingVariants&&entity instanceof net.minecraft.world.entity.LivingEntity))s.candidates.add(entity);}
     public boolean spawned(){return candidates.stream().anyMatch(e->!e.isRemoved()&&e.level().getEntity(e.getId())==e);}

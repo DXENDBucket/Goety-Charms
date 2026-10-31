@@ -1,0 +1,72 @@
+{
+  "algorithm": "shared-charm-stamp-2",
+  "stamp_offset": [
+    -1,
+    -2
+  ],
+  "base_sha256": "eeefdbe8bf94ba830939af6b2dd8bcb88fe9aac2c463dd6d9ea91ba449fe5826",
+  "output_sha256": "9913a3651d858b3d8578b59e3ab390ce4c80926274bfa2e8a9c4f61411fe1ace",
+  "invariant": "32px silhouette and alpha unchanged; only central seal differs",
+  "stamp": [
+    [
+      [
+        14,
+        14
+      ],
+      [
+        14,
+        23
+      ]
+    ],
+    [
+      [
+        10,
+        19
+      ],
+      [
+        18,
+        19
+      ]
+    ],
+    [
+      [
+        14,
+        15
+      ],
+      [
+        17,
+        19
+      ]
+    ],
+    [
+      [
+        17,
+        19
+      ],
+      [
+        14,
+        22
+      ]
+    ],
+    [
+      [
+        14,
+        22
+      ],
+      [
+        11,
+        19
+      ]
+    ],
+    [
+      [
+        11,
+        19
+      ],
+      [
+        14,
+        15
+      ]
+    ]
+  ]
+}

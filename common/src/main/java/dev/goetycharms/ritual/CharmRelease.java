@@ -30,6 +30,8 @@ public final class CharmRelease {
         if(adapter==null||stack.getItem()!=CharmPlatform.charged(adapter.kind()))return fail(player,"missing_recipe");
         var catalyst=CharmPlatform.catalyst(stack);
         if(catalyst.isEmpty()||!source.getActivationItem().test(catalyst))return fail(player,"invalid_charm");
+        if(adapter.kind()==CharmAdapter.Kind.TELEPORTATION)return UtilityRelease.teleport(stack,player,source,adapter,catalyst);
+        if(adapter.kind()==CharmAdapter.Kind.LOCATION)return UtilityRelease.locate(stack,player,source,adapter,catalyst);
         if(!world.hasChunkAt(origin)||!world.mayInteract(player,origin)||!world.getWorldBorder().isWithinBounds(origin)
                 ||origin.getY()<world.getMinBuildHeight()||origin.getY()+2>=world.getMaxBuildHeight())return fail(player,"unsafe");
         if(source.getEntityToSummon()==ModEntityType.SUMMON_APOSTLE.get()&&world.getDifficulty()==Difficulty.PEACEFUL)return fail(player,"peaceful");
@@ -56,10 +58,7 @@ public final class CharmRelease {
         }
         // A non-ticking, unplaced context supplies the native finish method with its normal
         // target and recipe. It is never inserted into the world or used as an inventory device.
-        var context=new DarkAltarBlockEntity(origin,com.Polarice3.Goety.common.blocks.ModBlocks.DARK_ALTAR.get().defaultBlockState()) {
-            @Override public RitualRecipe getCurrentRitualRecipe(){return source;}
-        };
-        context.setLevel(world);context.castingPlayer=player;context.getConvertEntity=conversion?(Mob)target:null;
+        var context=context(world,origin,player,source);context.getConvertEntity=conversion?(Mob)target:null;
         boolean success;
         try(var scope=CompletionScope.release(context,type,!conversion)) {
             adapter.finish(use,context,catalyst.copy());
@@ -80,6 +79,12 @@ public final class CharmRelease {
         if(target!=null)origin=target.blockPosition();
         activate(stack,player,origin,target);
     }
-    private static boolean fail(Player player,String key){player.displayClientMessage(Component.translatable("message.goety_charms."+key),true);return false;}
+    static DarkAltarBlockEntity context(ServerLevel world,BlockPos pos,Player player,RitualRecipe source) {
+        var context=new DarkAltarBlockEntity(pos,com.Polarice3.Goety.common.blocks.ModBlocks.DARK_ALTAR.get().defaultBlockState()) {
+            @Override public RitualRecipe getCurrentRitualRecipe(){return source;}
+        };
+        context.setLevel(world);context.castingPlayer=player;return context;
+    }
+    static boolean fail(Player player,String key){player.displayClientMessage(Component.translatable("message.goety_charms."+key),true);return false;}
     private CharmRelease() { }
 }

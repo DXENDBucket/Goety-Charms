@@ -1,6 +1,6 @@
 # Goety Charms · 诡厄符咒
 
-Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.1.1**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
+Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.2.0**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
 
 ## 制作与使用
 
@@ -14,6 +14,14 @@ Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.1.1**, MI
 
 召唤符与转化符分别显示使用说明；转化符另行列出与 Goety JEI 一致的可用实体目标名称。
 
+## 传送与定位
+
+- **传送符咒**：将记录了同维度目的地的指路石，以及原传送仪式的末影之眼、末影珍珠放在基座上，手持空白符咒封存。指路石的实际数据会一并保存。之后长按使用，调用原生传送仪式，把使用者传送到记录方块上方一格；仍只限同维度。不额外增加落点碰撞检查、主动加载区块或重置摔落距离。
+- **定位符咒**：将原定位仪式的空地图与其他辅材放在基座上封存。使用时以玩家当时的位置为中心，执行原生结构搜索，产出 Goety 原生探索地图。封存时不搜索结构。
+- 定位搜索期间请将原符咒保留在物品栏；成功交付地图后才消耗一枚。搜索失败、超时、离线或切换维度均不消耗。每名玩家同时最多有一个搜索；服务端停止时取消等待。背包放不下的地图掉落在使用者身边。
+
+这两类符咒同样自动派生真正的 Goety JEI 仪式配方，费用、时间、环境与研究仍由来源配方决定。
+
 例如：野火转化符使用专家下界仪式，基座放熔岩桶、壁垒聚晶、下界合金碎片（或原配方标签认可的替代物）、觉醒绿宝石、恶魂之泪；手持空白符咒激活。
 
 召出的生物按原仪式初始化归属、变体、装备和原生生命周期。使徒符咒仍产生原生的降临过程：和平难度拒绝释放，在下界保留原生警告／再次使用确认；不会把使徒变成友军。环境布置只在封存时检查。
@@ -22,11 +30,11 @@ Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.1.1**, MI
 
 从实际加载的仪式自动生成真正的 Goety 封存配方，使用原生祭坛，进入 Goety 原生 JEI 仪式分类；没有另一套材料支付、灵魂扣费或仪式进度实现。
 
-- 支持原生三种召唤类型、三种转化类型，配方命名空间不限。
-- 新类型注册若直接使用未修改的原生 SummonRitual／ConvertRitual，也可自动识别。
+- 支持原生三种召唤类型、三种转化类型，以及传送和定位类型，配方命名空间不限。
+- 新类型注册若直接使用未修改的原生 SummonRitual／ConvertRitual／TeleportRitual／LocateRitual，也可自动识别。
 - 自定义执行类需通过 `RitualCharms.register(factoryId, adapter)` 接入，避免只根据实体字段猜测而遗漏特殊逻辑。
 - 重载数据包后重建派生配方；既有符咒引用原配方ID。源配方删除、被禁用或不再受支持时拒绝释放并保留符咒。
-- 首版范围为召唤和转化，包含以原生召唤类型实现的天气仪式。传送、附魔和其他结果类型尚未接入。
+- 目前支持召唤、转化、传送和定位，包含以原生召唤类型实现的天气仪式。附魔和其他结果类型尚未接入。
 
 ## 配置与管理
 
@@ -41,8 +49,10 @@ Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.1.1**, MI
 
 指令会提供已经封存的测试物品；创造页里的无数据样本和JEI输出示例不能直接释放，需制作或使用上述指令。
 
+测试传送时，目标玩家主手持有已绑定同维度坐标的指路石，再执行 `/goety_charms give @p goety:teleport_ritual`，指令会复制该指路石的数据。定位示例为 `/goety_charms give @p goety:locate/ancient_city`。
+
 ## 素材与开发
 
-[三种符咒预览](docs/art/charms-preview.png)。32×32共用底材，召唤／转化仅改变中央印记。底稿由内置imagegen生成，再使用落日之下的像素整理工具；实际提示词与来源哈希保存在 `art/pixel/records/goety_charms.blank_charm.json`，后处理脚本为 `tools/make_charm_variants.py`。原始生成图和中间版本留在本地忽略目录，不随模组打包。
+[前三种符咒预览](docs/art/charms-preview.png) · [传送与定位符咒预览](docs/art/utility-charms-preview.png)。五种物品使用32×32共用底材，通过绿色召唤印、紫色转化印、青色传送印和赭色定位印区分用途。底稿由内置imagegen生成，再使用落日之下的像素整理工具；实际提示词与来源哈希保存在 `art/pixel/records/goety_charms.blank_charm.json`，后处理脚本为 `tools/make_charm_variants.py`。原始生成图和中间版本留在本地忽略目录，不随模组打包。
 
 [实现、验证与边界](docs/development.md)。本批只编译、打包并检查发行文件，**没有启动游戏、服务端或GameTest**。回归用例已编译，原生祭坛完整扣费、客户端画面和共存环境仍待运行验证。

@@ -16,9 +16,16 @@ public final class CharmTooltips {
             lines.add(Component.translatable("tooltip.goety_charms.blank"));
         } else {
             boolean conversion = stack.getItem() == CharmPlatform.charged(CharmAdapter.Kind.CONVERSION);
+            boolean teleport = stack.getItem() == CharmPlatform.charged(CharmAdapter.Kind.TELEPORTATION);
+            boolean locate = stack.getItem() == CharmPlatform.charged(CharmAdapter.Kind.LOCATION);
             lines.add(Component.translatable(CharmPlatform.catalyst(stack).isEmpty()
                     ? "tooltip.goety_charms.preview"
-                    : conversion ? "tooltip.goety_charms.use_conversion" : "tooltip.goety_charms.use_summoning"));
+                    : conversion ? "tooltip.goety_charms.use_conversion" : teleport ? "tooltip.goety_charms.use_teleportation"
+                    : locate ? "tooltip.goety_charms.use_location" : "tooltip.goety_charms.use_summoning"));
+            if(teleport) {
+                var destination=com.Polarice3.Goety.common.items.WaystoneItem.getPosition(CharmPlatform.catalyst(stack));
+                if(destination!=null)lines.add(Component.translatable("tooltip.goety_charms.destination",destination.pos().getX(),destination.pos().getY()+1,destination.pos().getZ(),destination.dimension().location().toString()));
+            }
             if (conversion) {
                 // Prefer current recipe data; the snapshot also works for playerless JEI previews.
                 String target = CharmPlatform.conversionTarget(stack);

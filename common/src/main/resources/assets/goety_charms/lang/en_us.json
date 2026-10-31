@@ -17,5 +17,18 @@
   "message.goety_charms.unsafe": "There is not enough safe space here.",
   "message.goety_charms.peaceful": "The Apostle cannot descend on Peaceful difficulty.",
   "message.goety_charms.wrong_target": "Aim at a creature suitable for this conversion.",
-  "message.goety_charms.blocked": "The ritual could not take effect. The charm remains intact."
+  "message.goety_charms.blocked": "The ritual could not take effect. The charm remains intact.",
+  "item.goety_charms.teleportation_charm": "Teleportation Charm",
+  "item.goety_charms.location_charm": "Location Charm",
+  "item.goety_charms.location_charm.named": "%s Location Charm",
+  "tooltip.goety_charms.use_teleportation": "Hold use to return to the sealed destination in the same dimension.",
+  "tooltip.goety_charms.use_location": "Hold use to locate the structure from your current position and create a map.",
+  "tooltip.goety_charms.destination": "Destination: %s, %s, %s (%s)",
+  "message.goety_charms.unbound_destination": "This charm has no valid destination.",
+  "message.goety_charms.wrong_dimension": "The destination is in another dimension.",
+  "message.goety_charms.search_busy": "A location charm is already searching.",
+  "message.goety_charms.search_started": "Searching for the structure. Keep the charm in your inventory.",
+  "message.goety_charms.search_complete": "The structure has been marked on your map.",
+  "message.goety_charms.search_failed": "The search failed. The charm remains intact.",
+  "message.goety_charms.search_timeout": "The search timed out. The charm remains intact."
 }

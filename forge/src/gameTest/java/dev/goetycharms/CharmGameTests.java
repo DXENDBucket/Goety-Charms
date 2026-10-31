@@ -3,6 +3,8 @@ import net.minecraft.gametest.framework.*;
 import net.minecraftforge.gametest.*;
 @GameTestHolder("goety_charms") @PrefixGameTestTemplate(false)
 public final class CharmGameTests {
+    @GameTest(template="empty") public static void nativeTeleportDestination(GameTestHelper h){CharmCases.teleport(h,TestPlayers.player(h),s->net.minecraft.world.item.ItemStack.of(s.save(new net.minecraft.nbt.CompoundTag())));}
+    @GameTest(template="empty") public static void nativeLocationMap(GameTestHelper h){CharmCases.locationMap(h,TestPlayers.player(h));}
     @GameTest(template="empty") public static void nativeRecipeDerivation(GameTestHelper h){CharmCases.derivation(h);}
     @GameTest(template="empty") public static void sealedDataAndNativeNetwork(GameTestHelper h){CharmCases.sealing(h,TestPlayers.player(h),s->{var saved=net.minecraft.world.item.ItemStack.of(s.save(new net.minecraft.nbt.CompoundTag()));var buf=new net.minecraft.network.FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());try{buf.writeItem(saved);return buf.readItem();}finally{buf.release();}});}
     @GameTest(template="empty") public static void nativeSummonOwnership(GameTestHelper h){CharmCases.summon(h,TestPlayers.player(h));}

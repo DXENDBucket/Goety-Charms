@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "namespace": "goety_charms",
+  "id": "location_charm",
+  "kind": "item",
+  "layout": "generated",
+  "size": 32,
+  "family": "Ritual charms: ivory parchment-and-bone plaque, dark rim, burgundy cord, shared silhouette and central stamping panel.",
+  "palette": [],
+  "references": [],
+  "processing": {
+    "sampling": "box",
+    "colors": 16,
+    "padding": 2,
+    "alpha_threshold": 128
+  },
+  "textures": {
+    "sprite": {
+      "subject": "The shared ivory charm base stamped with an ochre compass seal",
+      "constraints": "Bold 32-pixel silhouette, transparent background, no text, shared family silhouette."
+    }
+  }
+}

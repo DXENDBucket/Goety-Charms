@@ -13,7 +13,18 @@ public final class SealingRitual extends Ritual {
     @Override public boolean identify(Level level,BlockPos pos,Player player,ItemStack activation) {
         if(!(recipe instanceof SealingRecipe sealed))return false;
         var selected=CharmPlatform.selection(activation);
-        return (selected==null||selected.equals(sealed.sourceId))&&super.identify(level,pos,player,activation);
+        return (selected==null||selected.equals(sealed.sourceId))&&super.identify(level,pos,player,activation)
+                &&validCatalyst(level,pos,player,sealed,java.util.List.of());
+    }
+    @Override public boolean isValid(Level level,BlockPos pos,DarkAltarBlockEntity altar,Player player,ItemStack activation,java.util.List<net.minecraft.world.item.crafting.Ingredient> remaining) {
+        return super.isValid(level,pos,altar,player,activation,remaining)
+                &&validCatalyst(level,pos,player,(SealingRecipe)recipe,altar.consumedIngredients);
+    }
+    private boolean validCatalyst(Level level,BlockPos pos,Player player,SealingRecipe sealed,java.util.List<ItemStack> consumed) {
+        var adapter=dev.goetycharms.api.RitualCharms.definition(sealed.source);
+        if(adapter==null)return false;
+        var catalyst=consumed.isEmpty()?getItemsOnPedestals(level,pos).stream().filter(sealed.source.getActivationItem()::test).findFirst().orElse(ItemStack.EMPTY):consumed.get(0);
+        return !catalyst.isEmpty()&&adapter.canSeal(player,catalyst);
     }
     @Override public void finish(Level level,BlockPos pos,DarkAltarBlockEntity altar,Player player,ItemStack activation) {
         var sealed=(SealingRecipe)recipe;

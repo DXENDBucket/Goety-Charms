@@ -31,13 +31,15 @@ public final class CharmPlatform {
     private static final java.util.function.Supplier<CharmItem> SUMMON=ITEMS.registerItem("summoning_charm",p->new CharmItem(p,false),new Item.Properties().stacksTo(16));
     private static final java.util.function.Supplier<CharmItem> CONVERT=ITEMS.registerItem("conversion_charm",p->new CharmItem(p,false),new Item.Properties().stacksTo(16));
     private static final java.util.function.Supplier<DataComponentType<ItemContainerContents>> CATALYST=DATA.register("catalyst",()->DataComponentType.<ItemContainerContents>builder().persistent(ItemContainerContents.CODEC).networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
+    private static final java.util.function.Supplier<CharmItem> TELEPORT=ITEMS.registerItem("teleportation_charm",p->new CharmItem(p,false),new Item.Properties().stacksTo(16));
+    private static final java.util.function.Supplier<CharmItem> LOCATE=ITEMS.registerItem("location_charm",p->new CharmItem(p,false),new Item.Properties().stacksTo(16));
     private static final java.util.function.Supplier<RecipeSerializer<SealingRecipe>> SERIALIZER=SERIALIZERS.register("sealing",SealingSerializer::new);
     static {FACTORIES.register("seal",()->new ModRitualFactory(SealingRitual::new));
         TABS.register("charms",()->CreativeModeTab.builder().title(Component.translatable("itemGroup.goety_charms")).icon(()->new ItemStack(blank()))
-                .displayItems((parameters,output)->{output.accept(blank());output.accept(charged(CharmAdapter.Kind.SUMMONING));output.accept(charged(CharmAdapter.Kind.CONVERSION));}).build());}
+                .displayItems((parameters,output)->{output.accept(blank());for(var kind:CharmAdapter.Kind.values())output.accept(charged(kind));}).build());}
     private static CompoundTag data(ItemStack stack){return stack.getOrDefault(DataComponents.CUSTOM_DATA,CustomData.EMPTY).copyTag();}
     public static Item blank(){return BLANK.get();}
-    public static Item charged(CharmAdapter.Kind kind){return kind==CharmAdapter.Kind.SUMMONING?SUMMON.get():CONVERT.get();}
+    public static Item charged(CharmAdapter.Kind kind){return switch(kind){case SUMMONING -> SUMMON.get();case CONVERSION -> CONVERT.get();case TELEPORTATION -> TELEPORT.get();case LOCATION -> LOCATE.get();};}
     public static RecipeSerializer<SealingRecipe> serializer(){return SERIALIZER.get();}
     public static boolean enabled(){return Settings.enabled();}
     public static int useTicks(){return Settings.useTicks();}
@@ -46,8 +48,11 @@ public final class CharmPlatform {
     public static ResourceLocation entity(ItemStack stack){var value=data(stack).getString("goety_charms:entity");return value.isEmpty()?null:ResourceLocation.tryParse(value);}
     public static String conversionTarget(ItemStack stack){return data(stack).getString("goety_charms:convert_target");}
     public static void conversionTarget(ItemStack stack,String name){var tag=data(stack);if(name!=null&&!name.isBlank())tag.putString("goety_charms:convert_target",name);else tag.remove("goety_charms:convert_target");stack.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));}
+    public static String locationName(ItemStack stack){return data(stack).getString("goety_charms:location_name");}
+    public static void locationName(ItemStack stack,String name){if(name!=null&&!name.isBlank()){var tag=data(stack);tag.putString("goety_charms:location_name",name);stack.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));}}
     public static void select(ItemStack stack,ResourceLocation id){var tag=data(stack);tag.putString("goety_charms:source",id.toString());stack.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));}
-    public static void write(ItemStack stack,ResourceLocation id,ResourceLocation entity,ItemStack catalyst){select(stack,id);var tag=data(stack);tag.putString("goety_charms:entity",entity.toString());stack.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));if(!catalyst.isEmpty())stack.set(CATALYST.get(),ItemContainerContents.fromItems(List.of(catalyst)));}
+    public static void write(ItemStack stack,ResourceLocation id,ResourceLocation entity,ItemStack catalyst){select(stack,id);var tag=data(stack);if(entity!=null)tag.putString("goety_charms:entity",entity.toString());stack.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));if(!catalyst.isEmpty())stack.set(CATALYST.get(),ItemContainerContents.fromItems(List.of(catalyst)));}
+    public static boolean sameCharm(ItemStack a,ItemStack b){return ItemStack.isSameItemSameComponents(a,b);}
     public static ItemStack catalyst(ItemStack stack){return stack.getOrDefault(CATALYST.get(),ItemContainerContents.EMPTY).copyOne();}
     public static RitualRecipe source(Level level,ResourceLocation id){return level.getRecipeManager().byKey(id).map(RecipeHolder::value).filter(r->r instanceof RitualRecipe).map(r->(RitualRecipe)r).orElse(null);}
     public static List<SealingRecipe> sealings(Level level){return level.getRecipeManager().getAllRecipesFor(ModRecipeSerializer.RITUAL_TYPE.get()).stream().map(RecipeHolder::value).filter(r->r instanceof SealingRecipe).map(r->(SealingRecipe)r).toList();}
@@ -62,6 +67,9 @@ public final class CharmPlatform {
     public static void output(com.Polarice3.Goety.common.blocks.entities.DarkAltarBlockEntity altar,ItemStack result){altar.itemStackHandler.setStackInSlot(0,result);}
     public static void register(IEventBus bus){ITEMS.register(bus);DATA.register(bus);SERIALIZERS.register(bus);FACTORIES.register(bus);TABS.register(bus);
         NeoForge.EVENT_BUS.addListener(net.neoforged.bus.api.EventPriority.NORMAL,true,(net.neoforged.neoforge.event.entity.EntityJoinLevelEvent event)->CompletionScope.observe(event.getEntity()));
+        NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.event.tick.ServerTickEvent.Post event)->UtilityRelease.tick(event.getServer()));
+        NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent event)->UtilityRelease.cancel(event.getEntity().getUUID()));
+        NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.event.server.ServerStoppedEvent event)->UtilityRelease.clear());
         NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.event.entity.player.ItemTooltipEvent event)->{
             dev.goetycharms.item.CharmTooltips.append(event.getItemStack(),event.getEntity(),event.getToolTip(),event.getFlags().isAdvanced());
         });

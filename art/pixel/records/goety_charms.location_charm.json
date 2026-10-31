@@ -1,0 +1,39 @@
+{
+  "algorithm": "pixel-assets-1",
+  "outputs": {
+    "sprite": "914e59a08c9a45a97cbcc208c1085f30b04373a31d64f0efde87e7e5a26248bb"
+  },
+  "pillow": "12.0.0",
+  "revision": "7a0184503a1c2e13",
+  "sources": {
+    "sprite": {
+      "file": "original.png",
+      "generator": "procedural",
+      "prompt_used": null,
+      "sha256": "9913a3651d858b3d8578b59e3ab390ce4c80926274bfa2e8a9c4f61411fe1ace"
+    }
+  },
+  "spec": {
+    "family": "Ritual charms: ivory parchment-and-bone plaque, dark rim, burgundy cord, shared silhouette and central stamping panel.",
+    "id": "location_charm",
+    "kind": "item",
+    "layout": "generated",
+    "namespace": "goety_charms",
+    "palette": [],
+    "processing": {
+      "alpha_threshold": 128,
+      "colors": 16,
+      "padding": 2,
+      "sampling": "box"
+    },
+    "references": [],
+    "schema_version": 1,
+    "size": 32,
+    "textures": {
+      "sprite": {
+        "constraints": "Bold 32-pixel silhouette, transparent background, no text, shared family silhouette.",
+        "subject": "The shared ivory charm base stamped with an ochre compass seal"
+      }
+    }
+  }
+}

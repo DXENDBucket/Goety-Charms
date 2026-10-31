@@ -17,5 +17,18 @@
   "message.goety_charms.unsafe": "这里没有足够的安全空间。",
   "message.goety_charms.peaceful": "和平难度下使徒无法降临。",
   "message.goety_charms.wrong_target": "请瞄准符合这种转化条件的生物。",
-  "message.goety_charms.blocked": "仪式未能生效，符咒仍然完好。"
+  "message.goety_charms.blocked": "仪式未能生效，符咒仍然完好。",
+  "item.goety_charms.teleportation_charm": "传送符咒",
+  "item.goety_charms.location_charm": "定位符咒",
+  "item.goety_charms.location_charm.named": "%s定位符咒",
+  "tooltip.goety_charms.use_teleportation": "长按右键，返回封存的目的地；仅限同维度。",
+  "tooltip.goety_charms.use_location": "长按右键，以当前位置寻找目标结构并绘制地图。",
+  "tooltip.goety_charms.destination": "目的地：%s，%s，%s（%s）",
+  "message.goety_charms.unbound_destination": "符咒没有记录有效的目的地。",
+  "message.goety_charms.wrong_dimension": "目的地不在当前维度。",
+  "message.goety_charms.search_busy": "已有一枚定位符咒正在搜索。",
+  "message.goety_charms.search_started": "符咒正在寻找目标；请将它留在物品栏中。",
+  "message.goety_charms.search_complete": "目标已标记在地图上。",
+  "message.goety_charms.search_failed": "定位未能完成，符咒仍然完好。",
+  "message.goety_charms.search_timeout": "定位等待超时，符咒仍然完好。"
 }

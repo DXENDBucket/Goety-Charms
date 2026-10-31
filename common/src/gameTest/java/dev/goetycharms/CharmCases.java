@@ -19,8 +19,7 @@ public final class CharmCases {
     public static ItemStack charm(SealingRecipe recipe) {var catalyst=recipe.source.getActivationItem().getItems()[0].copy();catalyst.setCount(1);return Charms.create(recipe.sourceId,recipe.source,catalyst);}
     public static void derivation(GameTestHelper h) {
         var list=CharmPlatform.sealings(h.getLevel());h.assertTrue(!list.isEmpty(),"Native summon and conversion recipes are derived during real recipe reload");
-        h.assertTrue(list.stream().anyMatch(r->RitualCharms.definition(r.source).kind()==CharmAdapter.Kind.CONVERSION)
-                &&list.stream().anyMatch(r->RitualCharms.definition(r.source).kind()==CharmAdapter.Kind.SUMMONING),"Both families are present");
+        for(var kind:CharmAdapter.Kind.values())h.assertTrue(list.stream().anyMatch(r->RitualCharms.definition(r.source).kind()==kind),"Derived family present: "+kind);
         for(var r:list) {
             h.assertTrue(r.getIngredients().size()==r.source.getIngredients().size()+1,"Original catalyst becomes an extra pedestal ingredient");
             h.assertTrue(r.getSoulCost()==r.source.getSoulCost()&&r.getDuration()==r.source.getDuration()&&r.getResearch().equals(r.source.getResearch()),"Native payment, duration and research preserved");
@@ -57,6 +56,46 @@ public final class CharmCases {
     public static void missing(GameTestHelper h,ServerPlayer player) {
         var charm=charm(recipe(h,"summon_zombie_thrall"));CharmPlatform.select(charm,net.minecraft.resources.ResourceLocation.tryParse("missing:ritual"));
         h.assertTrue(!CharmRelease.activate(charm,player,h.absolutePos(new BlockPos(5,1,5)),null)&&charm.getCount()==1,"Missing source recipe keeps the charm");h.succeed();
+    }
+    public static ItemStack boundWaystone(GameTestHelper h,ServerPlayer player,BlockPos pos) {
+        var stone=recipe(h,"teleport_ritual").source.getActivationItem().getItems()[0].copy();stone.setCount(1);
+        player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,stone);
+        h.getLevel().setBlockAndUpdate(pos,net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        var hit=new net.minecraft.world.phys.BlockHitResult(pos.getCenter().add(0,.5,0),net.minecraft.core.Direction.UP,pos,false);
+        stone.useOn(new net.minecraft.world.item.context.UseOnContext(player,net.minecraft.world.InteractionHand.MAIN_HAND,hit));
+        h.assertTrue(com.Polarice3.Goety.common.items.WaystoneItem.getPosition(stone)!=null,"Native item interaction binds the actual waystone");
+        return stone;
+    }
+    public static void teleport(GameTestHelper h,ServerPlayer player,UnaryOperator<ItemStack> roundTrip) {
+        var r=recipe(h,"teleport_ritual");var pos=h.absolutePos(new BlockPos(5,1,5));
+        var unbound=charm(r);
+        h.assertTrue(!CharmRelease.activate(unbound,player,player.blockPosition(),null)&&unbound.getCount()==1,"Unbound teleport cannot consume a charm");
+        var stone=boundWaystone(h,player,pos);
+        var charm=roundTrip.apply(Charms.create(r.sourceId,r.source,stone));
+        h.assertTrue(com.Polarice3.Goety.common.items.WaystoneItem.getPosition(CharmPlatform.catalyst(charm)).pos().equals(pos),"Native destination survives item serialization");
+        h.getLevel().setBlockAndUpdate(pos.above(),net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        h.getLevel().setBlockAndUpdate(pos.above(2),net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        h.assertTrue(CharmRelease.activate(charm,player,player.blockPosition(),null)&&charm.isEmpty(),"Native teleport completes and consumes one charm");
+        h.assertTrue(player.position().distanceToSqr(new net.minecraft.world.phys.Vec3(pos.getX(),pos.getY()+1,pos.getZ()))<.000001,"Native waypoint coordinates are used");h.succeed();
+    }
+    public static void locationMap(GameTestHelper h,ServerPlayer player) {
+        var r=recipe(h,"locate/ancient_city");var charm=charm(r);
+        h.assertTrue(charm.getItem()==CharmPlatform.charged(CharmAdapter.Kind.LOCATION)
+                &&r.source.getStructureName().equals(CharmPlatform.locationName(charm)),"Location charm retains native structure display metadata");
+        var pos=h.absolutePos(new BlockPos(4,1,4));
+        var context=new DarkAltarBlockEntity(pos,ModBlocks.DARK_ALTAR.get().defaultBlockState()) {
+            @Override public com.Polarice3.Goety.common.crafting.RitualRecipe getCurrentRitualRecipe(){return r.source;}
+        };
+        context.setLevel(h.getLevel());context.castingPlayer=player;context.findStructurePos=pos;
+        // Isolate native map completion from expensive world-generation searches.
+        try(var scope=CompletionScope.release(context,null,false)) {
+            h.assertTrue(r.source.getRitual().isValid(h.getLevel(),pos,context,player,CharmPlatform.catalyst(charm),java.util.List.of()),"Native validation accepts already-paid ingredients");
+            RitualCharms.definition(r.source).finish(new CharmAdapter.Use(h.getLevel(),player,pos,null,r.source),context,CharmPlatform.catalyst(charm));
+        }
+        var result=CharmPlatform.output(context);
+        h.assertTrue(result.is(net.minecraft.world.item.Items.FILLED_MAP)&&context.findStructurePos==null,"Native locate finish creates a real exploration map and clears its result");
+        h.assertTrue(result.getHoverName().equals(net.minecraft.network.chat.Component.translatable(r.source.getStructureName())),"Native exploration map retains its localized structure name");
+        h.assertTrue(!CompletionScope.paid(context),"Paid release scope is restored after native map completion");h.succeed();
     }
     private CharmCases(){ }
 }

@@ -18,7 +18,9 @@ public final class CharmCommands {
                     if(source==null||RitualCharms.adapter(id,source)==null){ctx.getSource().sendFailure(Component.translatable("message.goety_charms.missing_recipe"));return 0;}
                     var examples=source.getActivationItem().getItems();
                     if(examples.length==0){ctx.getSource().sendFailure(Component.translatable("message.goety_charms.invalid_charm"));return 0;}
-                    var catalyst=examples[0].copy();catalyst.setCount(1);var charm=Charms.create(id,source,catalyst);
+                    var held=player.getMainHandItem();var catalyst=(source.getActivationItem().test(held)?held:examples[0]).copy();catalyst.setCount(1);
+                    if(!RitualCharms.adapter(id,source).canSeal(player,catalyst)){ctx.getSource().sendFailure(Component.translatable("message.goety_charms.unbound_destination"));return 0;}
+                    var charm=Charms.create(id,source,catalyst);
                     if(!player.addItem(charm))player.drop(charm,false);return 1;})))));
     }
     private CharmCommands(){ }

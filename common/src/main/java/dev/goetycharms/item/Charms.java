@@ -12,9 +12,10 @@ public final class Charms {
         var adapter=RitualCharms.definition(source);
         if(adapter==null)throw new IllegalArgumentException("Unsupported charm ritual "+id);
         var stack=new ItemStack(CharmPlatform.charged(adapter.kind()));
-        var entity=adapter.kind()==CharmAdapter.Kind.SUMMONING?source.getEntityToSummon():source.getEntityToConvertInto();
-        CharmPlatform.write(stack,id,BuiltInRegistries.ENTITY_TYPE.getKey(entity),catalyst);
+        var entity=switch(adapter.kind()) {case SUMMONING -> source.getEntityToSummon();case CONVERSION -> source.getEntityToConvertInto();default -> null;};
+        CharmPlatform.write(stack,id,entity==null?null:BuiltInRegistries.ENTITY_TYPE.getKey(entity),catalyst);
         if(adapter.kind()==CharmAdapter.Kind.CONVERSION)CharmPlatform.conversionTarget(stack,source.getEntityToConvertDisplayName());
+        if(adapter.kind()==CharmAdapter.Kind.LOCATION)CharmPlatform.locationName(stack,source.getStructureName());
         return stack;
     }
     public static EntityType<?> targetType(ItemStack stack){var id=CharmPlatform.entity(stack);return id==null?null:BuiltInRegistries.ENTITY_TYPE.getOptional(id).orElse(null);}

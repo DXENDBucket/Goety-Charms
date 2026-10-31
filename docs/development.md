@@ -4,7 +4,7 @@
 
 Independent shared-source project. NeoForge uses Goety 3.2.2, Java21 and NeoForge21.1.250. Forge uses Goety2.5.59.2, Java17 and Forge47.4.0. No Ars, Conflux or Nouveau source/build dependency is present. Local upstream JARs are ignored development dependencies, never embedded.
 
-`RitualCharms` maps native factory identities to summon/conversion adapters and accepts exact native execution classes registered under other factory IDs. Explicit adapters are required for custom execution subclasses. Adapter registration must occur during setup on both sides; native metadata still supplies the target entity kind.
+`RitualCharms` maps native factory identities to summon/conversion/teleport/location adapters and accepts exact native execution classes registered under other factory IDs. Explicit adapters are required for custom execution subclasses. Adapter registration must occur during setup on both sides; native metadata supplies entity or structure targets. `canSeal` validates catalyst-specific requirements; bound waystones must contain a same-dimension destination.
 
 ## Derivation and altar lifecycle
 
@@ -24,13 +24,23 @@ A caller-owned thread-local scope observes entity-join attempts and checks accep
 
 Apostle release uses the native warning flag in the Nether, rejects Peaceful, and retains the original SummonApostle entity's delayed visuals and boss spawn. No forced Nether/biome/night restriction is invented. Source recipe configuration/exclusion can disable release.
 
+## Native utility results
+
+Teleport seals the actual consumed waystone snapshot. Release checks only native binding and same-dimension requirements, then calls the source ritual's finish. No collision, world-border or explicit chunk-loading policy is added, and fall distance is left to native behavior. A successful native position change consumes one charm in survival. The give command copies a matching main-hand catalyst so bound coordinates can be tested without manufacturing a destination.
+
+Location postpones the native LocateRitual.isValid search until release. UtilityRelease owns a main-thread, per-player pending operation and an unplaced, non-ticking native completion context. Goety owns the asynchronous structure search, search radius/known-structure handling, map generation, decorations and title. While its future is unfinished, no further native validation/search call is made. Only pending operations are polled, four times per second; the normal empty-map state is constant work when no searches exist.
+
+Native locate validation normally rechecks nearby pedestal materials. A narrowly scoped injection accepts an empty remaining-ingredients list only for the prepaid release's exact world, origin and player; it does not bypass ingredient checks for normal altars. Native completion callbacks remain paid once at sealing. Native map output is transferred directly from the completion context to the player, rather than maintained in an invisible inventory block.
+
+The original charm stays in the player's inventory until native map output succeeds. Identity plus item-data checks permit stack-count changes but prevent a different/replaced charm from completing the pending operation. Source removal/exclusion/reload, death, dimension change, logout and server stop cancel delivery. A 120-second in-game-time deadline cancels stalled waits; native futures receive cancellation, which does not guarantee an already-running upstream search worker immediately stops. Repeated activation while one search is pending is rejected. Full inventory drops only the native map remainder. Creative mode retains the charm.
+
 ## Tooltips
 
 Summoning and conversion charms have separate use descriptions. Conversion charms show the source ritual's `entity_to_convert.display_name` on its own localized target line, matching native Goety JEI rather than naming the conversion output. A saved translation-key snapshot supports playerless recipe previews; when a player context is available, current recipe metadata takes priority and also supplies the target for older charms. This display snapshot does not change server-side target validation.
 
 ## Verification
 
-Both platforms provide six compile-checked native-path cases: derived recipes/metadata, sealing completion + item save/network data, owned native summon, conversion + wrong target retention, removed source retention, derived-recipe network synchronization. The direct completion fixture does not claim to test an entire running altar payment cycle.
+Both platforms provide eight compile-checked native-path cases: derived recipes/metadata across all four families, sealing completion + item save/network data, owned native summon, conversion + wrong target retention, removed source retention, derived-recipe network synchronization, bound native teleport/unbound retention, and native exploration-map completion. The map fixture seeds a native search result to avoid world-generation work; it does not claim to test an actual asynchronous structure search. The direct completion fixture does not claim to test an entire running altar payment cycle.
 
 Only compilation and packaging are authorized for this batch. No client, dedicated server or GameTest was started. Production Forge reobfuscation, declared refmap and RecipeManager.apply SRG target are checked by verifyRelease. Final artifact fingerprints and exact results are recorded separately in build-receipt.json. Actual UI, item animation, full altar operation, Apostle presentation and addon coexistence remain unverified.
 

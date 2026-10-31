@@ -1,0 +1,39 @@
+{
+  "algorithm": "pixel-assets-1",
+  "outputs": {
+    "sprite": "e3fe6d337cb7ed8993c3b3f3ec63e2aecd6f7f295540ce7e2e92972dc9cf825c"
+  },
+  "pillow": "12.0.0",
+  "revision": "518997f4e2eade72",
+  "sources": {
+    "sprite": {
+      "file": "original.png",
+      "generator": "procedural",
+      "prompt_used": null,
+      "sha256": "6236f2160abda55a0fca030a6c25eb965ea4dfb2fdebb33f4d965f4f554d1992"
+    }
+  },
+  "spec": {
+    "family": "Ritual charms: ivory parchment-and-bone plaque, dark rim, burgundy cord, shared silhouette and central stamping panel.",
+    "id": "teleportation_charm",
+    "kind": "item",
+    "layout": "generated",
+    "namespace": "goety_charms",
+    "palette": [],
+    "processing": {
+      "alpha_threshold": 128,
+      "colors": 16,
+      "padding": 2,
+      "sampling": "box"
+    },
+    "references": [],
+    "schema_version": 1,
+    "size": 32,
+    "textures": {
+      "sprite": {
+        "constraints": "Bold 32-pixel silhouette, transparent background, no text, shared family silhouette.",
+        "subject": "The shared ivory charm base stamped with a cyan gateway and upward arrow"
+      }
+    }
+  }
+}

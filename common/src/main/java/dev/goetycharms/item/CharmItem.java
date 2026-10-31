@@ -41,6 +41,10 @@ public final class CharmItem extends Item {
         return blank&&level.getBlockEntity(pos) instanceof com.Polarice3.Goety.common.blocks.entities.DarkAltarBlockEntity;
     }
     @Override public Component getName(ItemStack stack) {
+        if(stack.getItem()==CharmPlatform.charged(dev.goetycharms.api.CharmAdapter.Kind.LOCATION)) {
+            var name=CharmPlatform.locationName(stack);
+            if(!name.isBlank())return Component.translatable(getDescriptionId()+".named",Component.translatable(name));
+        }
         var type=Charms.targetType(stack);
         return blank||type==null?super.getName(stack):Component.translatable(getDescriptionId()+".named",type.getDescription());
     }
