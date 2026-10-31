@@ -36,6 +36,8 @@ public final class CharmPlatform {
     public static boolean allowed(ResourceLocation id){return Settings.allowed(id);}
     public static ResourceLocation selection(ItemStack stack){var value=stack.hasTag()?stack.getTag().getString("goety_charms:source"):"";return value.isEmpty()?null:ResourceLocation.tryParse(value);}
     public static ResourceLocation entity(ItemStack stack){var value=stack.hasTag()?stack.getTag().getString("goety_charms:entity"):"";return value.isEmpty()?null:ResourceLocation.tryParse(value);}
+    public static String conversionTarget(ItemStack stack){return stack.hasTag()?stack.getTag().getString("goety_charms:convert_target"):"";}
+    public static void conversionTarget(ItemStack stack,String name){if(name!=null&&!name.isBlank())stack.getOrCreateTag().putString("goety_charms:convert_target",name);else if(stack.hasTag())stack.getTag().remove("goety_charms:convert_target");}
     public static void select(ItemStack stack,ResourceLocation id){stack.getOrCreateTag().putString("goety_charms:source",id.toString());}
     public static void write(ItemStack stack,ResourceLocation id,ResourceLocation entity,ItemStack catalyst){select(stack,id);stack.getOrCreateTag().putString("goety_charms:entity",entity.toString());if(!catalyst.isEmpty())stack.getOrCreateTag().put("goety_charms:catalyst",catalyst.save(new net.minecraft.nbt.CompoundTag()));}
     public static ItemStack catalyst(ItemStack stack){return stack.hasTag()?ItemStack.of(stack.getTag().getCompound("goety_charms:catalyst")):ItemStack.EMPTY;}
@@ -53,10 +55,7 @@ public final class CharmPlatform {
     public static void register(IEventBus bus){ITEMS.register(bus);SERIALIZERS.register(bus);FACTORIES.register(bus);TABS.register(bus);
         MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.NORMAL,true,(net.minecraftforge.event.entity.EntityJoinLevelEvent event)->CompletionScope.observe(event.getEntity()));
         MinecraftForge.EVENT_BUS.addListener((net.minecraftforge.event.entity.player.ItemTooltipEvent event)->{
-            var stack=event.getItemStack();if(!(stack.getItem() instanceof CharmItem))return;
-            if(stack.getItem()==blank())event.getToolTip().add(Component.translatable("tooltip.goety_charms.blank"));
-            else event.getToolTip().add(Component.translatable(catalyst(stack).isEmpty()?"tooltip.goety_charms.preview":"tooltip.goety_charms.use"));
-            var selected=selection(stack);if(selected!=null&&event.getFlags().isAdvanced())event.getToolTip().add(Component.literal(selected.toString()).withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
+            dev.goetycharms.item.CharmTooltips.append(event.getItemStack(),event.getEntity(),event.getToolTip(),event.getFlags().isAdvanced());
         });
         MinecraftForge.EVENT_BUS.addListener((net.minecraftforge.event.RegisterCommandsEvent event)->dev.goetycharms.command.CharmCommands.register(event.getDispatcher()));
     }

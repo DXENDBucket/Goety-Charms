@@ -24,6 +24,10 @@ A caller-owned thread-local scope observes entity-join attempts and checks accep
 
 Apostle release uses the native warning flag in the Nether, rejects Peaceful, and retains the original SummonApostle entity's delayed visuals and boss spawn. No forced Nether/biome/night restriction is invented. Source recipe configuration/exclusion can disable release.
 
+## Tooltips
+
+Summoning and conversion charms have separate use descriptions. Conversion charms show the source ritual's `entity_to_convert.display_name` on its own localized target line, matching native Goety JEI rather than naming the conversion output. A saved translation-key snapshot supports playerless recipe previews; when a player context is available, current recipe metadata takes priority and also supplies the target for older charms. This display snapshot does not change server-side target validation.
+
 ## Verification
 
 Both platforms provide six compile-checked native-path cases: derived recipes/metadata, sealing completion + item save/network data, owned native summon, conversion + wrong target retention, removed source retention, derived-recipe network synchronization. The direct completion fixture does not claim to test an entire running altar payment cycle.

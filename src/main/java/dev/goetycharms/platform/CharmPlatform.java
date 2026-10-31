@@ -44,6 +44,8 @@ public final class CharmPlatform {
     public static boolean allowed(ResourceLocation id){return Settings.allowed(id);}
     public static ResourceLocation selection(ItemStack stack){var value=data(stack).getString("goety_charms:source");return value.isEmpty()?null:ResourceLocation.tryParse(value);}
     public static ResourceLocation entity(ItemStack stack){var value=data(stack).getString("goety_charms:entity");return value.isEmpty()?null:ResourceLocation.tryParse(value);}
+    public static String conversionTarget(ItemStack stack){return data(stack).getString("goety_charms:convert_target");}
+    public static void conversionTarget(ItemStack stack,String name){var tag=data(stack);if(name!=null&&!name.isBlank())tag.putString("goety_charms:convert_target",name);else tag.remove("goety_charms:convert_target");stack.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));}
     public static void select(ItemStack stack,ResourceLocation id){var tag=data(stack);tag.putString("goety_charms:source",id.toString());stack.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));}
     public static void write(ItemStack stack,ResourceLocation id,ResourceLocation entity,ItemStack catalyst){select(stack,id);var tag=data(stack);tag.putString("goety_charms:entity",entity.toString());stack.set(DataComponents.CUSTOM_DATA,CustomData.of(tag));if(!catalyst.isEmpty())stack.set(CATALYST.get(),ItemContainerContents.fromItems(List.of(catalyst)));}
     public static ItemStack catalyst(ItemStack stack){return stack.getOrDefault(CATALYST.get(),ItemContainerContents.EMPTY).copyOne();}
@@ -61,10 +63,7 @@ public final class CharmPlatform {
     public static void register(IEventBus bus){ITEMS.register(bus);DATA.register(bus);SERIALIZERS.register(bus);FACTORIES.register(bus);TABS.register(bus);
         NeoForge.EVENT_BUS.addListener(net.neoforged.bus.api.EventPriority.NORMAL,true,(net.neoforged.neoforge.event.entity.EntityJoinLevelEvent event)->CompletionScope.observe(event.getEntity()));
         NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.event.entity.player.ItemTooltipEvent event)->{
-            var stack=event.getItemStack();if(!(stack.getItem() instanceof CharmItem))return;
-            if(stack.getItem()==blank())event.getToolTip().add(Component.translatable("tooltip.goety_charms.blank"));
-            else event.getToolTip().add(Component.translatable(catalyst(stack).isEmpty()?"tooltip.goety_charms.preview":"tooltip.goety_charms.use"));
-            var selected=selection(stack);if(selected!=null&&event.getFlags().isAdvanced())event.getToolTip().add(Component.literal(selected.toString()).withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
+            dev.goetycharms.item.CharmTooltips.append(event.getItemStack(),event.getEntity(),event.getToolTip(),event.getFlags().isAdvanced());
         });
         NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.event.RegisterCommandsEvent event)->dev.goetycharms.command.CharmCommands.register(event.getDispatcher()));
     }

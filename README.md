@@ -1,6 +1,6 @@
 # Goety Charms · 诡厄符咒
 
-Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.1.0**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
+Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.1.1**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
 
 ## 制作与使用
 
@@ -11,6 +11,8 @@ Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.1.0**, MI
 5. 完成后在祭坛取出符咒。长按右键一秒释放；转化符需要在释放时瞄准符合条件的生物，召唤符在选定位置产生原生召唤结果。
 
 制作转化符时无需把目标生物带到祭坛。释放时检查目标、当前源配方、原生召唤数量限制与可用空间；成功消耗一张，失败保留。创造模式成功使用不消耗。使用符咒不会再支付已在制作时付过的灵魂费用。
+
+召唤符与转化符分别显示使用说明；转化符另行列出与 Goety JEI 一致的可用实体目标名称。
 
 例如：野火转化符使用专家下界仪式，基座放熔岩桶、壁垒聚晶、下界合金碎片（或原配方标签认可的替代物）、觉醒绿宝石、恶魂之泪；手持空白符咒激活。
 
