@@ -27,9 +27,14 @@ processResources { inputs.property 'version',project.version; filesMatching('MET
 tasks.named('jar') { from('../LICENSE'); archiveFileName="goety-charms-${project.version}-mc1.20.1-forge.jar"; manifest { attributes 'MixinConfigs':'goety_charms.mixins.json' }; finalizedBy 'reobfJar' }
 tasks.named('sourcesJar') { from('../LICENSE') }
 
+ext.releaseArchiveTask = 'reobfJar'
+ext.releasePackFormat = 15
+ext.blankCharmRecipe = 'data/goety_charms/recipes/blank_charm.json'
+apply from: '../gradle/verify-resources.gradle'
+
 // Check the final production archive, including the one native Minecraft injection.
 tasks.register('verifyRelease') {
-    dependsOn 'reobfJar'
+    dependsOn 'reobfJar', 'verifyReleaseResources'
     doLast {
         new java.util.zip.ZipFile(tasks.named('jar').get().archiveFile.get().asFile).withCloseable { zip ->
             def config=new groovy.json.JsonSlurper().parse(zip.getInputStream(zip.getEntry('goety_charms.mixins.json')))

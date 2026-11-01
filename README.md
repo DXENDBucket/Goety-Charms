@@ -1,6 +1,8 @@
 # Goety Charms · 诡厄符咒
 
-Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.2.2**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
+Independent Goety addon by EndXiom. Mod ID `goety_charms`, version **0.2.3**, MIT License. Available for Minecraft **1.21.1 / NeoForge** and **1.20.1 / Forge**. Goety is required; Ars Nouveau, Goety & Nouveau and Ars Conflux are not required.
+
+0.2.3 修复两个版本发行包缺少根目录 `pack.mcmeta` 的问题，并在构建检查中验证资源元数据、符咒贴图与模型、本地化和空白符咒配方。
 
 ## 制作与使用
 

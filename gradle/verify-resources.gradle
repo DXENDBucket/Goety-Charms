@@ -1,0 +1,26 @@
+// Inspect the actual distributable, rather than only the source resource directory.
+tasks.register('verifyReleaseResources') {
+    dependsOn project.ext.releaseArchiveTask
+    doLast {
+        new java.util.zip.ZipFile(tasks.named('jar').get().archiveFile.get().asFile).withCloseable { zip ->
+            def required = ['pack.mcmeta', 'LICENSE',
+                'assets/goety_charms/lang/en_us.json', 'assets/goety_charms/lang/zh_cn.json',
+                project.ext.blankCharmRecipe]
+            for (name in ['blank_charm', 'summoning_charm', 'conversion_charm', 'teleportation_charm', 'location_charm']) {
+                required.add("assets/goety_charms/models/item/${name}.json")
+                required.add("assets/goety_charms/textures/item/${name}.png")
+            }
+            required.each { name ->
+                if (zip.getEntry(name.toString()) == null) throw new GradleException("Missing release resource: ${name}")
+            }
+            def metadata = new groovy.json.JsonSlurper().parse(zip.getInputStream(zip.getEntry('pack.mcmeta')))
+            if (metadata.pack?.pack_format != project.ext.releasePackFormat || !metadata.pack?.description) {
+                throw new GradleException('Invalid release pack.mcmeta')
+            }
+            if (project.ext.releasePackFormat == 34 && metadata.pack?.supported_formats != [34, 48]) {
+                throw new GradleException('NeoForge resources must cover client format 34 and server data format 48')
+            }
+        }
+    }
+}
+tasks.named('check') { dependsOn 'verifyReleaseResources' }

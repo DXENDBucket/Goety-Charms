@@ -51,13 +51,13 @@ Only compilation and packaging are authorized for this batch. No client, dedicat
 NeoForge, Java21:
 
 ```powershell
-./gradlew.bat :compileGameTestJava :jar :sourcesJar --offline --max-workers=1 --no-parallel --no-daemon
+./gradlew.bat :compileGameTestJava :jar :sourcesJar :check --offline --max-workers=1 --no-parallel --no-daemon
 ```
 
 Forge directory, Java17:
 
 ```powershell
-./gradlew.bat :compileGameTestJava :jar :sourcesJar :verifyRelease --offline --max-workers=1 --no-parallel --no-daemon
+./gradlew.bat :compileGameTestJava :jar :sourcesJar :check :verifyRelease --offline --max-workers=1 --no-parallel --no-daemon
 ```
 
 A runtime check can later use :runGameTestServer, after the user authorizes a game JVM and memory is available. GameTest passing would not prove client visuals.

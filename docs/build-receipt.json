@@ -1,45 +1,42 @@
 {
-  "version": "0.2.2",
-  "platforms": [
-    "1.21.1 NeoForge",
-    "1.20.1 Forge"
-  ],
+  "version": "0.2.3",
+  "source_base_commit": "7fd472d",
   "upstream_goety": [
     "3.2.2",
     "2.5.59.2"
   ],
+  "change": "Add platform-specific root pack.mcmeta; check final release resource packaging during Gradle check.",
   "validation": {
-    "main_compilation": "passed on both loaders",
-    "gametest_source_compilation": "eight unchanged cases previously compile-checked; not rerun for API/branding batch",
-    "forge_reobf_and_verifyRelease": "passed",
-    "release_license_models_lang_mixin_and_dependency_exclusion": "passed",
+    "neoforge_jar_sourcesJar_check": "passed, Java 21, offline",
+    "forge_jar_sourcesJar_check_verifyRelease": "passed, Java 17, offline; production reobfuscation and native Mixin mapping verified",
+    "final_archive_inspection": "all four archives: ZIP integrity, unique entries, metadata format, JSON parsing, five models/textures and localized names passed; no bundled third-party class files",
     "runtime_client_server_or_gametest": "not run",
-    "full_native_altar_payment_cycle": "not runtime tested",
-    "split_tooltip_packaging": "passed on both loaders; localized use descriptions and native conversion-target display key",
-    "utility_release_packaging": "passed; five item models/textures, bilingual names and native paid-ingredient injection present on both loaders",
-    "native_utility_recipe_data": "NeoForge: 1 teleport + 20 locate; Forge: 1 teleport + 19 locate",
-    "teleport_behavior": "native destination/dimension rules and native finish; no added landing checks, explicit chunk loading or fall-distance reset",
-    "async_structure_search": "not runtime tested; native exploration-map finish fixture compiled only",
-    "blank_charm_recipe": "Both release archives verified: shaped, center paper + four cardinal quartz, output 4",
-    "public_charm_api": "CharmAccess kind/sealed/release compiled and packaged on both loaders; no Ars/Conflux dependency",
-    "branding": "transparent square original imagegen PNG, logo metadata and CF English/Chinese listing assets checked"
+    "deployment_or_publication": "not performed"
   },
   "artifacts": [
     {
-      "path": "build/libs/goety-charms-0.2.2-mc1.21.1-neoforge.jar",
-      "sha256": "2fc0736aa8342b1aeec8886ded6f2c9366ad782f56140dbc673287949dd9ddf1"
+      "path": "build/libs/goety-charms-0.2.3-mc1.21.1-neoforge.jar",
+      "sha256": "7ac0523f7bfd0a158500045f1ebe1a3c8d9d74f78c52d9731c32d3394dbffb52",
+      "size": 736703,
+      "pack_format": 34
     },
     {
-      "path": "build/libs/goety-charms-0.2.2-sources.jar",
-      "sha256": "47464d3e039b6497d0ebbda170fff9ecd64e63c2144c4b24e980ad989f5a634e"
+      "path": "build/libs/goety-charms-0.2.3-sources.jar",
+      "sha256": "d14bc2c520ca48a912057e93acb901d447d8d95f41b2c8e64afc17b992514b01",
+      "size": 702466,
+      "pack_format": 34
     },
     {
-      "path": "forge/build/libs/goety-charms-0.2.2-mc1.20.1-forge.jar",
-      "sha256": "ef56f8d85ba1643fc34df90987e213113c326c2f783a9a69736f48504bdbf511"
+      "path": "forge/build/libs/goety-charms-0.2.3-mc1.20.1-forge.jar",
+      "sha256": "a16723458403b24d189bf6964f6da750d36e36f59f92e78a5c41047597a91858",
+      "size": 737395,
+      "pack_format": 15
     },
     {
-      "path": "forge/build/libs/goety-charms-0.2.2-sources.jar",
-      "sha256": "06b7d043143fe0632b3b5133e32a711f5bc65d7237f4f63ec081e9749f2e5f10"
+      "path": "forge/build/libs/goety-charms-0.2.3-sources.jar",
+      "sha256": "053dcfaab548508e8493bba0545b4f4c76b82323075ac81ff764b06604b0a154",
+      "size": 702182,
+      "pack_format": 15
     }
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "version": "0.2.3",
+  "curseforge_project_id": 1776245,
+  "publication_status": "Both accepted by Upload API; moderation/public visibility not checked",
+  "files": [
+    {
+      "platform": "neoforge",
+      "minecraft": "1.21.1",
+      "file_id": 9399319,
+      "sha256": "7ac0523f7bfd0a158500045f1ebe1a3c8d9d74f78c52d9731c32d3394dbffb52"
+    },
+    {
+      "platform": "forge",
+      "minecraft": "1.20.1",
+      "file_id": 9399322,
+      "sha256": "a16723458403b24d189bf6964f6da750d36e36f59f92e78a5c41047597a91858"
+    }
+  ],
+  "plan": "Ars-Conflux/build/curseforge/20261102-044751-bac7c9f6/plan.json",
+  "deployment": {
+    "instance": "1.21.1-万法归一",
+    "path": "mods/goety-charms-0.2.3-mc1.21.1-neoforge.jar",
+    "sha256": "7ac0523f7bfd0a158500045f1ebe1a3c8d9d74f78c52d9731c32d3394dbffb52",
+    "old_version_removed": "0.2.2",
+    "unique_version": true,
+    "additional_backup": false,
+    "runtime_test": "not run"
+  }
+}
